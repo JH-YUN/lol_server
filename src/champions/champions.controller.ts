@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ChampionsService } from './champions.service';
 import { CreateChampionDto } from './dto/create-champion.dto';
 import { UpdateChampionDto } from './dto/update-champion.dto';
@@ -18,12 +26,15 @@ export class ChampionsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.championsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.championsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChampionDto: UpdateChampionDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateChampionDto: UpdateChampionDto,
+  ) {
     return this.championsService.update(+id, updateChampionDto);
   }
 
